@@ -10,6 +10,16 @@ const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
+// TEMPORARY DEBUG LOG — remove this once the contact form is confirmed working.
+// Open the browser console (F12) and reload the page: this prints on load,
+// no need to submit the form. If you see undefined for any value, the .env
+// file is not being picked up by the dev server / build.
+console.log("EmailJS env check:", {
+  service: EMAILJS_SERVICE_ID,
+  template: EMAILJS_TEMPLATE_ID,
+  key: EMAILJS_PUBLIC_KEY,
+});
+
 const initialForm = { name: "", email: "", subject: "", message: "" };
 
 function validate(form) {
@@ -70,7 +80,7 @@ export default function Contact() {
 
     setSending(true);
     try {
-      await emailjs.send(
+      const result = await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         {
@@ -83,12 +93,19 @@ export default function Contact() {
         { publicKey: EMAILJS_PUBLIC_KEY }
       );
 
+      // TEMPORARY DEBUG LOG — remove once confirmed working.
+      console.log("EmailJS send success:", result);
+
       setToast({
         type: "success",
         message: "Message sent successfully! I'll get back to you soon.",
       });
       setForm(initialForm);
-    } catch {
+    } catch (err) {
+      // TEMPORARY DEBUG LOG — this is the important one. Whatever prints
+      // here (status + text) tells us exactly what EmailJS rejected.
+      console.error("EmailJS send failed:", err);
+
       setToast({
         type: "error",
         message:
