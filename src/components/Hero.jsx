@@ -9,7 +9,7 @@ const LINES = [
   { prompt: "$", text: "cat role.txt" },
   {
     prompt: ">",
-    text: "Software Developer · MERN Stack Developer",
+    text: "Junior Software Developer · MERN Stack Developer",
     result: true,
   },
   { prompt: "$", text: "node status.js" },
@@ -63,7 +63,7 @@ export default function Hero() {
         <div className="hero-copy">
           <p className="hero-greeting">Hi, I&rsquo;m {profile.name}</p>
           <h1 className="hero-heading">
-            Software Developer <span className="hero-heading-divider">|</span> MERN
+            Junior Software Developer <span className="hero-heading-divider">|</span> MERN
             Stack Developer
           </h1>
           <p className="hero-text">

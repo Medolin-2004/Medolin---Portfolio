@@ -31,11 +31,17 @@ export default function About() {
             <span className="eyebrow">about</span>
             <h2 className="section-title">Building full-stack products, end to end</h2>
             <p className="about-lead">
-              I have hands-on experience across the MERN stack — from
-              responsive frontend interfaces to REST APIs and backend
-              integrations. My work spans full-stack MERN applications,
-              internship projects, and independent builds, with a focus on
-              writing code that's clean, maintainable and genuinely functional.
+              B.Tech Information Technology graduate with hands-on experience in
+              software and web application development through internships and
+              personal projects. Skilled in JavaScript, Python, HTML, CSS,
+              React.js, Node.js and Express.js, with knowledge of SQL
+              fundamentals and MongoDB. Experienced in developing application
+              features, integrating REST APIs, implementing authentication,
+              managing database operations and debugging application issues.
+              Familiar with Git, GitHub and software development workflows.
+              A quick learner with logical problem-solving skills, adaptability
+              and a strong interest in learning new technologies and building
+              reliable software solutions.
             </p>
 
             <div className="about-objective">

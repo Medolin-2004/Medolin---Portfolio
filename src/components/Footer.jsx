@@ -9,7 +9,7 @@ export default function Footer() {
         <div>
           <p className="footer-name">{profile.name}</p>
           <p className="footer-tagline mono">
-            Software Developer | MERN Stack Developer
+            Junior Software Developer | MERN Stack Developer
           </p>
         </div>
 

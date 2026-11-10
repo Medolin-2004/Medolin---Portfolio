@@ -3,16 +3,24 @@ import {
   FiServer,
   FiDatabase,
   FiTool,
+  FiTerminal,
+  FiShield,
+  FiCloud,
+  FiUploadCloud,
 } from "react-icons/fi";
 import { skills } from "../data/resume";
 import useReveal from "../hooks/useReveal";
 import "./Skills.css";
 
 const groupMeta = {
+  Programming: { icon: <FiTerminal /> },
   Frontend: { icon: <FiCode /> },
   Backend: { icon: <FiServer /> },
-  Database: { icon: <FiDatabase /> },
-  Tools: { icon: <FiTool /> },
+  Databases: { icon: <FiDatabase /> },
+  Concepts: { icon: <FiShield /> },
+  "Tools & Version Control": { icon: <FiTool /> },
+  Cloud: { icon: <FiCloud /> },
+  Deployment: { icon: <FiUploadCloud /> },
 };
 
 export default function Skills() {
