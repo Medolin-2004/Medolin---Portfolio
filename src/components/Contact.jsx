@@ -1,6 +1,14 @@
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
-import { FiMail, FiPhone, FiLinkedin, FiGithub, FiSend } from "react-icons/fi";
+import {
+  FiMail,
+  FiPhone,
+  FiLinkedin,
+  FiGithub,
+  FiSend,
+  FiCopy,
+  FiCheck,
+} from "react-icons/fi";
 import { profile } from "../data/resume";
 import Toast from "./Toast";
 import useReveal from "../hooks/useReveal";
@@ -40,7 +48,7 @@ function validate(form) {
 }
 
 const contactLinks = [
-  { icon: <FiMail />, label: profile.email, href: `mailto:${profile.email}` },
+  { icon: <FiMail />, label: profile.email, href: `mailto:${profile.email}`, copy: true },
   { icon: <FiPhone />, label: profile.phone, href: `tel:+91${profile.phone}` },
   { icon: <FiLinkedin />, label: profile.linkedinLabel, href: profile.linkedin },
   { icon: <FiGithub />, label: profile.githubLabel, href: profile.github },
@@ -52,6 +60,33 @@ export default function Contact() {
   const [errors, setErrors] = useState({});
   const [sending, setSending] = useState(false);
   const [toast, setToast] = useState(null);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = async () => {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(profile.email);
+      } else {
+        // Fallback for older browsers
+        const input = document.createElement("textarea");
+        input.value = profile.email;
+        input.style.position = "fixed";
+        input.style.opacity = "0";
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        document.body.removeChild(input);
+      }
+      setCopied(true);
+      setToast({ type: "success", message: "Email address copied to clipboard." });
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setToast({
+        type: "error",
+        message: `Could not copy. My email is ${profile.email}`,
+      });
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -210,6 +245,17 @@ export default function Contact() {
                       <span className="contact-link-icon">{link.icon}</span>
                       {link.label}
                     </a>
+                    {link.copy && (
+                      <button
+                        type="button"
+                        className="contact-copy"
+                        onClick={handleCopyEmail}
+                        aria-label="Copy email address"
+                      >
+                        {copied ? <FiCheck /> : <FiCopy />}
+                        <span>{copied ? "Copied" : "Copy"}</span>
+                      </button>
+                    )}
                   </li>
                 ))}
               </ul>
